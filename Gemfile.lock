@@ -1,6 +1,14 @@
+GIT
+  remote: git@github.com:pinglamb/nyan-cat-formatter.git
+  revision: 399fa9a797de4bc6735ba95208473c16b04f25fe
+  specs:
+    nyan-cat-formatter (0.10.1)
+      rspec (>= 3.5.0.beta4)
+
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (9.0.6)
     diff-lcs (1.2.5)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -20,6 +28,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
+  nyan-cat-formatter!
   rspec
 
 BUNDLED WITH

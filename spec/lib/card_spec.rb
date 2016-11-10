@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Card do
-  describe "#<=>" do
+  describe '#<=>' do
     it '3D < 4D' do
       card_3d = Card.new('3', 'D')
       card_4d = Card.new('4', 'D')
@@ -24,6 +24,34 @@ RSpec.describe Card do
       card_2h = Card.new('2', 'H')
       card_2c = Card.new('2', 'C')
       expect(card_2h <=> card_2c).to eq(0)
+    end
+  end
+
+  describe '#inspect' do
+    context 'example 1' do
+      let(:card) { Card.new('2', 'H') }
+
+      it { expect(card.inspect).to eq('2H') }
+    end
+
+    context 'example 2' do
+      let(:card) { Card.new('A', 'S') }
+
+      it { expect(card.inspect).to eq('AS') }
+    end
+  end
+
+  describe '#to_s' do
+    context 'example 1' do
+      let(:card) { Card.new('2', 'H') }
+
+      it { expect(card.to_s).to eq('2H') }
+    end
+
+    context 'example 2' do
+      let(:card) { Card.new('K', 'C') }
+
+      it { expect(card.to_s).to eq('KC') }
     end
   end
 end

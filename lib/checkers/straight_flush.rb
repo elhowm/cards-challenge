@@ -1,11 +1,5 @@
 module Checkers
-  class StraightFlush
-    attr_reader :cards
-
-    def initialize(cards)
-      @cards = cards
-    end
-
+  class StraightFlush < Base
     def bingo?
       suits_equeal? && faces_consistent?
     end

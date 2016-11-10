@@ -4,7 +4,8 @@ module Checkers
   class FourOfAKind < Base
     def bingo?
       faces = cards.map(&:face)
-      faces.any? { |face| faces.count(face) == 4 }
+      @kicker_cards = cards.select { |card| faces.count(card.face) == 4 }
+      !@kicker_cards.empty?
     end
   end
 end

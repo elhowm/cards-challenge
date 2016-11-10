@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :score, :kicker_score
+  attr_accessor :score, :kicker_card
   attr_reader :name, :hand
 
   def initialize(name)

@@ -14,6 +14,10 @@ class Card
     self_score <=> another_card_score
   end
 
+  def ==(another_card)
+    Deck::FACES.index(face) == Deck::FACES.index(another_card.face)
+  end
+
   def inspect
     face + suit
   end

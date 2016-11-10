@@ -7,56 +7,25 @@ RSpec.describe Checkers::StraightFlush do
   let(:checker) { described_class.new(cards) }
 
   describe '#bingo?' do
+    let(:flush) { Checkers::Flush }
+    let(:straight) { Checkers::Straight }
+
     context 'when condition becomes true' do
-      it 'returns true' do
-        expect(checker).to receive(:suits_equeal?).and_return(true)
-        expect(checker).to receive(:faces_consistent?).and_return(true)
-        expect(checker.bingo?).to eq(true)
+      before do
+        expect_any_instance_of(flush).to receive(:bingo?).and_return(true)
+        expect_any_instance_of(straight).to receive(:bingo?).and_return(true)
       end
+
+      it { expect(checker.bingo?).to eq(true) }
     end
 
     context 'when condition becomes false' do
-      it 'returns false' do
-        expect(checker).to receive(:suits_equeal?).and_return(true)
-        expect(checker).to receive(:faces_consistent?).and_return(false)
-        expect(checker.bingo?).to eq(false)
+      before do
+        expect_any_instance_of(flush).to receive(:bingo?).and_return(false)
+        expect_any_instance_of(straight).to receive(:bingo?).and_return(true)
       end
-    end
-  end
 
-  describe '#suits_equal?' do
-    context 'when suits equal' do
-      let(:cards) { make_cards(*%w(2D KD 7D JD TD)) }
-
-      it 'returns true' do
-        expect(checker.send(:suits_equal?)).to eq(true)
-      end
-    end
-
-    context 'when suits isn\'t equal' do
-      let(:cards) { make_cards(*%w(2D KD 7D JH TD)) }
-
-      it 'returns false' do
-        expect(checker.send(:suits_equal?)).to eq(false)
-      end
-    end
-  end
-
-  describe '#faces_consistent?' do
-    context 'when faces consistent' do
-      let(:cards) { make_cards(*%w(TD JH QD KS AH)) }
-
-      it 'returns true' do
-        expect(checker.send(:faces_consistent?)).to eq(true)
-      end
-    end
-
-    context 'when faces isn\'t consistent' do
-      let(:cards) { make_cards(*%w(TD JH QD KS 2H)) }
-
-      it 'returns false' do
-        expect(checker.send(:faces_consistent?)).to eq(false)
-      end
+      it { expect(checker.bingo?).to eq(false) }
     end
   end
 end

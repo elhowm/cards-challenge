@@ -4,5 +4,6 @@ class Player
 
   def initialize(name)
     @name = name
+    @hand = []
   end
 end

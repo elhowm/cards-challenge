@@ -9,7 +9,8 @@ module Checkers
 
     def score
       combinations = Judge::COMBINATIONS
-      combinations.size - combinations.index(self::class.name)
+      current = self::class.name.gsub('Checkers::', '')
+      combinations.size - combinations.index(current)
     end
   end
 end

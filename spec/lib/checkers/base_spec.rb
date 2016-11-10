@@ -17,7 +17,7 @@ RSpec.describe Checkers::Base do
 
     context 'when class name is Pair' do
       before do
-        expect(described_class).to receive(:name).and_return('OnePair')
+        expect(described_class).to receive(:name).and_return('Pair')
       end
 
       it { expect(checker.score).to eq(2) }

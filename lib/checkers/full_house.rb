@@ -1,3 +1,7 @@
+require_relative 'base'
+require_relative 'pair'
+require_relative 'three_of_a_kind'
+
 module Checkers
   class FullHouse < Base
     def bingo?

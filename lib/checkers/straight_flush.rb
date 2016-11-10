@@ -1,3 +1,7 @@
+require_relative 'base'
+require_relative 'straight'
+require_relative 'flush'
+
 module Checkers
   class StraightFlush < Base
     def bingo?

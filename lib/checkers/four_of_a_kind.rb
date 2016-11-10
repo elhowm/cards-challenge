@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Checkers
   class FourOfAKind < Base
     def bingo?

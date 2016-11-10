@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Checkers
   class Flush < Base
     def bingo?

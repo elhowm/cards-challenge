@@ -8,7 +8,7 @@ RSpec.describe Checkers::Straight do
 
   describe '#bingo?' do
     context 'when there is straight' do
-      let(:cards) { make_cards(*%w(TD JH QD KS AH)) }
+      let(:cards) { make_cards(*%w(TD JH QD KS AH 4C TC)) }
 
       it 'returns true' do
         expect(checker.send(:bingo?)).to eq(true)
@@ -16,7 +16,7 @@ RSpec.describe Checkers::Straight do
     end
 
     context 'when there isn\'t straight' do
-      let(:cards) { make_cards(*%w(TD JH QD KS 2H)) }
+      let(:cards) { make_cards(*%w(TD JH QD KS 2H 4C TC)) }
 
       it 'returns false' do
         expect(checker.send(:bingo?)).to eq(false)

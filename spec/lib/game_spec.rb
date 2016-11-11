@@ -12,7 +12,7 @@ end
 RSpec.describe Game do
   let(:game) { Game.new(2) }
 
-  before { game.stub(:puts) }
+  before { allow(game).to receive(:puts).at_least(:once) }
 
   describe '#play!' do
     after { game.play! }

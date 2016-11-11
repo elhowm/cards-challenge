@@ -14,7 +14,7 @@ module Checkers
       sequence.slice(0..-2).each.with_index do |card_code, index|
         if card_code == sequence[index + 1] - 1
           consistency_score += 1
-        else
+        elsif consistency_score < criteria
           consistency_score = 0
         end
       end

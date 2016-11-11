@@ -3,11 +3,22 @@ require_relative 'base'
 module Checkers
   class Straight < Base
     def bingo?
-      @kicker_cards = cards
-      converted = cards.map { |card| Deck::FACES.index(card.face) }.sort
-      converted.slice(0..-2)
-               .map.with_index { |card, i| card + 1 == converted[i + 1] }
-               .reduce(:&)
+      converted = cards.map { |card| Deck::FACES.index(card.face) }.sort.uniq
+      consistent? converted
+    end
+
+    private
+
+    def consistent?(sequence, criteria = 4)
+      consistency_score = 0
+      sequence.slice(0..-2).each.with_index do |card_code, index|
+        if card_code == sequence[index + 1] - 1
+          consistency_score += 1
+        else
+          consistency_score = 0
+        end
+      end
+      consistency_score == criteria
     end
   end
 end

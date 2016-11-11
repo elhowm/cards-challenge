@@ -18,10 +18,9 @@ class Judge
   def call_winner
     estimate_scores
     winners = winners_by_checker_score
-    return "#{winners.first.name} won!" if winners.size == 1
+    return winner_message(winners) if winners.size == 1
     winners = winners_by_kicker_score(winners)
-    return "#{winners.first.name} won!" if winners.size == 1
-    "#{winners.map(&:name).join(', ')} won!"
+    winner_message(winners)
   end
 
   private
@@ -58,5 +57,10 @@ class Judge
     probably_winner = contenders.sort_by(&:kicker_card).reverse.first
     winner_card = probably_winner.kicker_card
     players.select { |player| player.kicker_card == winner_card }
+  end
+
+  def winner_message(winners)
+    won_by = COMBINATIONS[-winners.first.score]
+    "#{winners.map(&:name).join(', ')} won! (#{won_by})"
   end
 end

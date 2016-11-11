@@ -15,9 +15,12 @@ RSpec.describe Judge do
       before do
         winners = [Player.new('TestPlayer')]
         expect(judge).to receive(:winners_by_checker_score).and_return(winners)
+        expect(judge).not_to receive(:winners_by_kicker_score)
+        expect(judge).to receive(:winner_message).with(winners)
+                                                 .and_return('test')
       end
 
-      it { expect(judge.call_winner).to eq('TestPlayer won!') }
+      it { expect(judge.call_winner).to eq('test') }
     end
 
     context 'when winner founded by kicker' do
@@ -25,9 +28,11 @@ RSpec.describe Judge do
         expect(judge).to receive(:winners_by_checker_score).and_return([])
         winners = [Player.new('TestPlayer')]
         expect(judge).to receive(:winners_by_kicker_score).and_return(winners)
+        expect(judge).to receive(:winner_message).with(winners)
+                                                 .and_return('test')
       end
 
-      it { expect(judge.call_winner).to eq('TestPlayer won!') }
+      it { expect(judge.call_winner).to eq('test') }
     end
 
     context 'when there are many winners' do
@@ -35,9 +40,11 @@ RSpec.describe Judge do
         expect(judge).to receive(:winners_by_checker_score).and_return([])
         winners = [Player.new('TestPlayer1'), Player.new('TestPlayer2')]
         expect(judge).to receive(:winners_by_kicker_score).and_return(winners)
+        expect(judge).to receive(:winner_message).with(winners)
+                                                 .and_return('test')
       end
 
-      it { expect(judge.call_winner).to eq('TestPlayer1, TestPlayer2 won!') }
+      it { expect(judge.call_winner).to eq('test') }
     end
   end
 
@@ -132,6 +139,29 @@ RSpec.describe Judge do
       it 'returns players with the higher card' do
         expect(judge.send(:winners_by_kicker_score, players)).to eq(players[0..1])
       end
+    end
+  end
+
+  describe '#winner_message' do
+    context 'when there is one winner' do
+      let(:winners) { [Player.new('Player1')] }
+      let(:expected_msg) { 'Player1 won! (FourOfAKind)' }
+
+      before { winners.first.score = 8 }
+
+      it { expect(judge.send(:winner_message, winners)).to eq(expected_msg) }
+    end
+
+    context 'when there are many winners' do
+      let(:winners) { [Player.new('Player1'), Player.new('Player2')] }
+      let(:expected_msg) { 'Player1, Player2 won! (ThreeOfAKind)' }
+
+      before do
+        winners[0].score = 4
+        winners[1].score = 4
+      end
+
+      it { expect(judge.send(:winner_message, winners)).to eq(expected_msg) }
     end
   end
 end

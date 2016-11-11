@@ -7,13 +7,13 @@ RSpec.describe Checkers::Flush do
 
   describe '#bingo?' do
     context 'when there is flush' do
-      let(:cards) { make_cards(*%w(2H 5H 9H JH AH)) }
+      let(:cards) { make_cards(*%w(2H 5H 9H JH AH 7D 8S)) }
 
       it { expect(checker.bingo?).to eq(true) }
     end
 
     context 'when there isn\'t flush' do
-      let(:cards) { make_cards(*%w(2H 5H 9S JH AH)) }
+      let(:cards) { make_cards(*%w(2H 5H 9S JH AH 7D 8S)) }
 
       it { expect(checker.bingo?).to eq(false) }
     end

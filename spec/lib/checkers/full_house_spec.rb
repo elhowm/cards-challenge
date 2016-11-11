@@ -21,8 +21,8 @@ RSpec.describe Checkers::FullHouse do
 
     context 'when there isn\'t full house' do
       before do
-        expect_any_instance_of(three).to receive(:bingo?).and_return(true)
-        expect_any_instance_of(pair).to receive(:bingo?).and_return(false)
+        expect_any_instance_of(pair).to receive(:bingo?).and_return(true)
+        expect_any_instance_of(three).to receive(:bingo?).and_return(false)
       end
 
       it { expect(checker.bingo?).to eq(false) }
